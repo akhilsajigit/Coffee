@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment</title>
+</head>
+<body>
+
+<form action="#" method="POST">
+    {% csrf_token %}
+
+    <div style="text-align:center; margin-top:-80px;">
+        <h1>Proceed to Payment</h1><br>
+        <h2 style="font-family: 'Times New Roman', Times, serif;">Payer : {{name}}</h2><br>
+        <img src="{% static 'payment/cash_payment_icon.jpg' %}" width="100px;" height="100px;">
+        <br>
+            <button class="btn">Make Payment</button>
+    </div>
+
+</form>
+
+    <!-- Include Razorpay script for payment -->
+
+
+
+<style>
+        * {
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+            font-family: cursive;
+        }
+        html,
+        body {
+            height: 100%;
+        }
+        body {
+            background-image: url({% static 'payment/payment_background.jpg' %});
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background-color: white;
+            padding: 25px;
+            border: 1px solid #bbbbbb;
+            border-radius: 5px;
+            box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 25%);
+        }
+        .title {
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .muted {
+            color: #8e7f7f;
+            display: block;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .btn_container {
+            padding: 20px;
+            text-align: center;
+        }
+        .btn {
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 4px 8px;
+            background-color: #a30217;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+    </style>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"
+data-key="rzp_test_PMmGnroCxOlaJ0"
+    data-amount="{{ pay_str }}"
+    data-currency="INR"
+    data-order_id="{{ payment.order_id }}"
+    data-buttontext=""
+    data-name="Coffee "
+    data-description="Your description"
+    data-image=""
+    data-prefill.name="Akhil"
+    data-prefill.email="akhilsaji@gmail.com"
+    data-theme.color="#fa7e37"
+        >
+
+</script>
+
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+{% if messages %}
+  {% for i in messages %}
+    {% if i.tags == 'warning' %}
+      <script>
+        swal('{{i}}',' ' ,'warning')
+      </script>
+    {% elif i.tags == 'error' %}
+      <script>
+        swal('{{i}}',' ' ,'error')
+      </script>
+    {% elif i.tags == 'info' %}
+      <script>
+        swal('{{i}}',' ' ,'info')
+      </script>
+    {% else %}
+      <script>
+        swal('{{i}}',' ' ,'success')
+      </script>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+</body>
+</html>

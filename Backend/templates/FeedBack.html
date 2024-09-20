@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FeedBacks</title>
+</head>
+<body>
+<div class="col-lg-10 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Feedbacks </h4>
+                  <p class="card-description">
+                    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Mobile_No.</th>
+                          <th>Email</th>
+                          <th>Subject</th>
+                          <th>Message</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for f in f_data %}
+                        <tr>
+                          <td>{{f.fd_back_Name}}</td>
+                          <td>{{f.fd_back_Mobile}}</td>
+                          <td>{{f.fd_back_Email}}</td>
+                          <td>{{f.fd_back_Subject}}</td>
+                          <td>{{f.fd_back_Message}}</td>
+                          <td>
+                            <a href="{% url 'feedback_data_delete' f_id=f.id %}">
+                              <button class="btn btn-danger" >Delete</button>
+                            </a>
+                          </td>
+                        </tr>
+                       {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+</body>
+</html>
+{% endblock %}

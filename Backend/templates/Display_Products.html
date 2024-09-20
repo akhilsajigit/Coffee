@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Products</title>
+</head>
+<body>
+<div class="col-lg-10 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Products Table</h4>
+                  <p class="card-description">
+                    ____________________________________________________________________________________________________________________________________________________________________________
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>Category Name</th>
+                          <th>Product Name</th>
+                          <th>Product Price</th>
+                          <th>Description</th>
+                          <th>Image</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in pdata %}
+                        <tr>
+                          <td>{{i.id}}</td>
+                          <td>{{i.Category}}</td>
+                          <td>{{i.Product_Name}}</td>
+                          <td>{{i.Product_Price}}</td>
+                          <td>{{i.Product_Description}}</td>
+                          <td>
+                            <img src="{{i.Product_Image.url}}" width="100px" height="200px">
+                          </td>
+                          <td>
+                            <a href="{% url 'edit_products_page'  pro_id=i.id %}">
+                            <button class="btn btn-info">Edit</button>
+                          </a>
+                          </td>
+                          <td>
+                            <a href="{% url 'delete_product_item' pro_id=i.id %}">
+                            <button class="btn btn-danger">Delete</button>
+                          </a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+</body>
+</html>
+{% endblock %}
